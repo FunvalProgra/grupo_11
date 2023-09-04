@@ -16,7 +16,11 @@ formLogin.addEventListener("submit", (e) => {
   console.log(email, password)
 
   if( user.email === email && user.password === password ) {
+    // guardar el login en el local storage
+    sessionStorage.setItem('loggin-info', 'true');
+
     window.location.href = './index.html';
+
   } else {
     alert("Los datos no coinciden.")
   }

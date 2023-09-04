@@ -1,6 +1,14 @@
 import { estudiantes } from "./estudiantes.js";
 import { print } from "./functions.js";
 
+// validar el login
+
+const loggin = sessionStorage.getItem('loggin-info');
+
+if (loggin !== 'true') {
+  window.location.href = './login.html';
+}
+
 // elementos HTML a usar
 const tbody = document.querySelector("#tbody");
 const form = document.querySelector("#form");
