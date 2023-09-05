@@ -19,6 +19,7 @@ formLogin.addEventListener("submit", (e) => {
   if( userLogged ) {
     // guardar el login en el local storage
     sessionStorage.setItem('loggin-info', 'true');
+    sessionStorage.setItem('loggin-username', `${userLogged.first_name} ${userLogged.last_name}`)
 
     window.location.href = './index.html';
 

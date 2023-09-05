@@ -14,6 +14,9 @@ const tbody = document.querySelector("#tbody");
 const form = document.querySelector("#form");
 const formFiltro = document.querySelector("#form-filtro");
 const logOut = document.querySelector("#logout");
+const title = document.querySelector("#title");
+
+title.innerHTML = "Bienvenido " + sessionStorage.getItem('loggin-username');
 
 print(estudiantes, tbody)
 
@@ -57,6 +60,7 @@ formFiltro.addEventListener("submit", event => {
 
 logOut.addEventListener("click", () => {
   sessionStorage.setItem('loggin-info', 'false');
+  sessionStorage.removeItem('loggin-username');
 
   window.location.href = './login.html';
 })
