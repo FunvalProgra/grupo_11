@@ -1,10 +1,8 @@
+import { users } from './users.js';
+
 // traer el formulario
 
 const formLogin = document.querySelector("#formLogin");
-const user = {
-  email: "demo@demo.com",
-  password: "Funval2023"
-}
 
 
 formLogin.addEventListener("submit", (e) => {
@@ -15,7 +13,10 @@ formLogin.addEventListener("submit", (e) => {
 
   console.log(email, password)
 
-  if( user.email === email && user.password === password ) {
+  /* login varios usuarios */
+  const userLogged = users.find( user => user.email === email && user.password === password )
+
+  if( userLogged ) {
     // guardar el login en el local storage
     sessionStorage.setItem('loggin-info', 'true');
 
