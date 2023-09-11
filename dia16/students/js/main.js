@@ -15,6 +15,7 @@ const form = document.querySelector("#form");
 const formFiltro = document.querySelector("#form-filtro");
 const logOut = document.querySelector("#logout");
 const title = document.querySelector("#title");
+const confirmDelete = document.querySelector("#confirmDelete");
 
 title.innerHTML = "Bienvenido " + sessionStorage.getItem("loggin-username");
 
@@ -45,6 +46,7 @@ form.addEventListener("submit", (event) => {
     nombre,
     responsable,
     pais,
+    id: estudiantesLocal.length // corregir el codigo de estudiante
   };
 
   estudiantesLocal.push(student);
@@ -84,13 +86,8 @@ logOut.addEventListener("click", () => {
   window.location.href = "./login.html";
 });
 
-function addEventDelete() {
-  // añadir el evento de borrar a los botones .delete
-  let botonesDelete = tbody.querySelectorAll(".delete");
-
-  botonesDelete.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      let id = parseInt(boton.getAttribute("data-id"));
+confirmDelete.addEventListener("click", () => {
+      let id = parseInt(confirmDelete.getAttribute("data-id"));
 
       let indice = estudiantesLocal.findIndex((student) => student.id === id);
 
@@ -100,6 +97,16 @@ function addEventDelete() {
 
       print(estudiantesLocal, tbody);
       addEventDelete();
+})
+
+function addEventDelete() {
+  // añadir el evento de borrar a los botones .delete
+  let botonesDelete = tbody.querySelectorAll(".delete");
+  
+  botonesDelete.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      confirmDelete.setAttribute('data-id', boton.getAttribute('data-id'));
     });
   });
 }
+

@@ -6,7 +6,7 @@ function crearRow(student) {
     <td>${student.nombre}</td>
     <td>${student.responsable}</td>
     <td>${student.pais}</td>
-    <td><button data-id="${student.id}" class="delete">X</button></td>
+    <td><button data-bs-toggle="modal" data-id="${student.id}" class="delete" data-bs-target="#confirmDeleteModal">X</button></td>
   </tr>
   `
 
