@@ -20,14 +20,24 @@ const confirmDelete = document.querySelector("#confirmDelete");
 title.innerHTML = "Bienvenido " + sessionStorage.getItem("loggin-username");
 
 let estudiantesLocal = [];
+let id_count;
 
 // recopilar la informacion del local storage
 if(getLocal('estudiantes')) {
   estudiantesLocal = getLocal('estudiantes');
+  id_count = getLocal('id_count');
 } else {
   setLocal('estudiantes', estudiantes);
   estudiantesLocal = getLocal('estudiantes');
+  
+  // ordena los estudiantes
+  estudiantesLocal.sort( (a,b) => a.id - b.id );
+
+  id_count = estudiantesLocal[estudiantesLocal.length - 1].id + 1;
+  // guardar count en localStorage
+  setLocal('id_count', id_count);
 }
+
 
 print(estudiantesLocal, tbody);
 addEventDelete();
@@ -42,18 +52,18 @@ form.addEventListener("submit", (event) => {
   let pais = form.pais.value;
 
   let student = {
+    id: id_count,
     matricula,
     nombre,
     responsable,
     pais,
-    id: estudiantesLocal.length // corregir el codigo de estudiante
   };
 
   estudiantesLocal.push(student);
   // estudiantes[estudiantes.length] = student;
 
   estudiantesLocal = updateLocal('estudiantes', estudiantesLocal);
-
+  id_count = updateLocal('id_count', id_count + 1);
 
   print(estudiantesLocal, tbody);
   addEventDelete();
@@ -65,14 +75,11 @@ form.addEventListener("submit", (event) => {
 
 formFiltro.addEventListener("submit", (event) => {
   event.preventDefault();
-  console.log(event);
   let nombre = formFiltro.nombre.value.toLowerCase();
 
   let alumnosFiltrados = estudiantesLocal.filter((student) =>
     student.nombre.toLowerCase().includes(nombre)
   );
-
-  console.log(alumnosFiltrados);
 
   print(alumnosFiltrados, tbody);
 
